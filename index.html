@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>StickyFreakyNote V 1.0</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="assest/styles/index_style.css">
+  <link rel="icon" type="image/ico" href="assest/img/fav.ico">
+</head>
+<body>
+  <div class="panel">
+    <ul class="panel__menu" id="menu">
+      <hr/>
+      <li id="signIn"> <a href="#">Login</a></li>
+      <li id="signUp"><a href="#">Sign up</a></li>
+    </ul>
+    <div class="panel__wrap">
+      <div class="panel__box active" id="signInBox">
+        <form action="signin.php" method="post">
+          <label>Username
+            <input type="text" name="username" required/>
+          </label>
+          <label>Password
+            <input type="password" name="password" required/>
+          </label>
+          <input type="submit" value="submit"/>
+        </form>
+      </div>
+      <div class="panel__box" id="signUpBox">
+        <form action="signup.php" method="post">
+          <label>Username
+            <input type="text" name="username" required/>
+          </label>
+          <label>Password
+            <input type="password" name="password" required />
+          </label>
+          <label>Confirm password
+            <input type="password" name="conf_pass"required />
+          </label>
+          <input type="submit" value="submit"/>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script  src="assest/scripts/index.js"></script>
+</body>
+</html>
