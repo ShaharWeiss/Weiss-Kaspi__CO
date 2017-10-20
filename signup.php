@@ -26,14 +26,29 @@ function newUser ($username, $password){//Add a new user .. duh ;p
 }
 //Code start
 require_once('connectvars.php');
-$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) or die ('Cannot create connection to Database');
+$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 mysqli_set_charset($con, "utf8") or die ('Could not set utf-8');//Will allow us to use hebrew
 $username = mysqli_real_escape_string($con, trim($_POST['username']));//Defence vs sql injection =
 $password = mysqli_real_escape_string($con, trim($_POST['password']));
 $conf_pass = mysqli_real_escape_string($con, trim($_POST['conf_pass']));
-('Cannot use SELECT query');
+echo $username;
+$sql = "SELECT * FROM users WHERE username = '".echo $username ."'";
+echo $sql;
+$result = mysqli_query($con, $sql) or die ('Fuck you');
+$rowcount = mysqli_num_rows($result);
+echo $rowcount;
+/*if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+*/
 
-newUser ($username, $password);
+
+//newUser ($username, $password);
 // newUser will call isExist($username) to verify the specifiv username doesnt already exist.
 //if it return false the function will check if password and confirmed password are the same
 //very simple stuff here
