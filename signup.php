@@ -1,10 +1,8 @@
 <?php
 //First define some functions..
 function isExist ($username){//Return TRUE if name already exist in users table
-  //mysqli_query($con,"SELECT * FROM Persons");
-  //$query = "SELECT * FROM 'users' WHERE username = $username";
-  $result = mysqli_query($con,"SELECT * FROM users WHERE username = $username") or die ('Cannot use SELECT query');
-  //$result = mysqli_query($con, $query) or die ('Cannot use SELECT query');
+  $query = "SELECT * FROM users WHERE username = $username";
+  $result = mysqli_query($con, $query) or die ('Cannot use SELECT query');
   return (mysqli_num_rows($result) != 0);
 }
 
@@ -33,13 +31,10 @@ mysqli_set_charset($con, "utf8") or die ('Could not set utf-8');//Will allow us 
 $username = mysqli_real_escape_string($con, trim($_POST['username']));//Defence vs sql injection =
 $password = mysqli_real_escape_string($con, trim($_POST['password']));
 $conf_pass = mysqli_real_escape_string($con, trim($_POST['conf_pass']));
-echo $username. ' '. $password.' '.$conf_pass;
-//$query  = "INSERT INTO users (username, password, id) VALUES ('$username', '$password')";
-//mysqli_query($con, $query) or die ("Cannot INSERT into Database");
+('Cannot use SELECT query');
 
-  $result = mysqli_query($con,"SELECT * FROM `users` WHERE username = $username") or die ('Cannot use SELECT query');
-
-//$result = mysqli_query($con, $query) or die ('Cannot use SELECT query');
-//newUser ($username, $password);
-
+newUser ($username, $password);
+// newUser will call isExist($username) to verify the specifiv username doesnt already exist.
+//if it return false the function will check if password and confirmed password are the same
+//very simple stuff here
 ?>
