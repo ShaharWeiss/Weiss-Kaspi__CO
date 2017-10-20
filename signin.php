@@ -26,6 +26,7 @@ if (signOk($username, $password) == 0) {echo '<script>alert ("Wrong username/pas
   else{
     session_start();
     $_SESSION['loged'] = $username;
+    $_SESSION['new'] = 0;//meanning user is not new.
     echo 'logged in as: '.$_SESSION['loged'];
   }
 
