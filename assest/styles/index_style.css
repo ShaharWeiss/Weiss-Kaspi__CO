@@ -15,7 +15,8 @@ a {
 
 .panel {
   width: 600px;
-  margin: auto;
+  margin:auto;
+
 }
 .panel__menu {
   width: 100%;

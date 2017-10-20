@@ -3,7 +3,7 @@
 function isExist ($username){//Return TRUE if name already exist in users table
   $con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
   if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
   }
   $query = "SELECT * FROM users WHERE username = '$username'";
   $result = mysqli_query($con, $query) or die ('Cannot use SELECT query');
@@ -19,56 +19,33 @@ function newUser ($username, $password){//Add a new user .. duh ;p
   global $conf_pass;//This will let us use the var which is outside the function scope
   $con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
   if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-if (isExist($username) > 0) {  echo '<script>alert ("Username already exist")</script>';
-                                echo '<script>location.href = "index.html"</script>';}
-if (isExist($username) == 0){
-              if (passChk($password, $conf_pass)){
-                      $query  = "INSERT INTO users (username, password) VALUES ('$username', SHA('$password'))";
-                      mysqli_query($con, $query) or die ("Cannot INSERT into Database");
-                      echo '<script>alert ("Username Created successfully")</script>';
-                      echo '<script>location.href = "welcome.php"</script>';
-                    }
-              else{
-                echo '<script>alert ("Password and confirmed password do not match")</script>';
-                echo '<script>location.href = "index.html"</script>';}
-
-}
-
-
-//}
-
-  //$flag2 = passChk ($password, $conf_pass);//Flag2 = 1 --> pass and conf pass equal
-  //if ($flag1 != 1 && $flag2 == 1 ) {echo 'both username is ok and pass';}
-
-
-
-
-  /*if (!isExist($username)) {
-    if (passChk($pass, $conf_pass)){
-      $query  = "INSERT INTO users (username, password) VALUES ('$username', SHA('$password'))";
-      mysqli_query($con, $query) or die ("Cannot INSERT into Database");
-      echo 'Username Created successfully';
-    } else {echo '<script>alert ("Password and confirmed password do not match")</script>';
-      header("Location: http://www.sweiss.co.il/sfn/index.html");
-    }
-  } else { echo '<script>alert ("Username already exist!")</script>';
-    header("Location: http://www.sweiss.co.il/sfn/index.html");
-  }*/
-  mysqli_close($con);
-}
-//Code start
-require_once('connectvars.php');
-$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-}
-mysqli_set_charset($con, "utf8") or die ('Could not set utf-8');//Will allow us to use hebrew
-$username = mysqli_real_escape_string($con, trim($_POST['username']));//Defence vs sql injection =
-$password = mysqli_real_escape_string($con, trim($_POST['password']));
-$conf_pass = mysqli_real_escape_string($con, trim($_POST['conf_pass']));
+  }
+  if (isExist($username) > 0) {  echo '<script>alert ("Username already exist")</script>';
+    echo '<script>location.href = "index.html"</script>';}
+    if (isExist($username) == 0){
+      if (passChk($password, $conf_pass)){
+        $query  = "INSERT INTO users (username, password) VALUES ('$username', SHA('$password'))";
+        mysqli_query($con, $query) or die ("Cannot INSERT into Database");
+        echo '<script>alert ("Username Created successfully")</script>';
+        echo '<script>location.href = "welcome.php"</script>';
+      }
+      else{
+        echo '<script>alert ("Password and confirmed password do not match")</script>';
+        echo '<script>location.href = "index.html"</script>';}
 
-newUser ($username, $password);
-
-?>
+      }
+      mysqli_close($con);
+    }
+    //Code start
+    require_once('connectvars.php');
+    $con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    mysqli_set_charset($con, "utf8") or die ('Could not set utf-8');//Will allow us to use hebrew
+    $username = mysqli_real_escape_string($con, trim($_POST['username']));//Defence vs sql injection =
+    $password = mysqli_real_escape_string($con, trim($_POST['password']));
+    $conf_pass = mysqli_real_escape_string($con, trim($_POST['conf_pass']));
+    newUser ($username, $password);
+    ?>
