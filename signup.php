@@ -38,7 +38,7 @@ echo $username. ' '. $password.' '.$conf_pass;
 //mysqli_query($con, $query) or die ("Cannot INSERT into Database");
 
   $result = mysqli_query($con,"SELECT * FROM `users` WHERE username = $username") or die ('Cannot use SELECT query');
-
+//WHY THE FUCK CANT IT RUN THIS QUERY OH MY FUCKING GOD
 //$result = mysqli_query($con, $query) or die ('Cannot use SELECT query');
 //newUser ($username, $password);
 
