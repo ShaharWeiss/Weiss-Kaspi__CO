@@ -12,7 +12,7 @@ function signOk ($username, $password){
 
 //Code start here
 require_once('connectvars.php');
-$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);//NOT SURE I NEED THIS
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
