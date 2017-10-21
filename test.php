@@ -24,7 +24,7 @@ function changeMemoStyle ($memoId, $style){
   }
 
     $query = "UPDATE memos SET style = '$style' WHERE id = $memoId";
-    echo $query;
+
   mysqli_query($con, $query) or die ("Cannot change memo style");
   mysqli_close($con);
 
@@ -56,7 +56,8 @@ function addImg($memoId, $imgUrl){
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-  $query = "UPDATE memos SET 'pic_url'=['$imgUrl'] WHERE id = $memoid";
+  $query = "UPDATE memos SET pic_url = '$imgUrl' WHERE id = $memoId";
+
   mysqli_query($con, $query) or die ("Cannot embed pic");
   mysqli_close($con);
 }
@@ -131,7 +132,7 @@ if(isset($_POST['btn_4']))
   $memoId = 6;
   $imgUrl = "www.blabla.bla.bla";
 
-  AddImg($memoId, $imgUrl)
+  AddImg($memoId, $imgUrl);
   echo "AddImg clicked";
 }
 if(isset($_POST['btn_5']))
