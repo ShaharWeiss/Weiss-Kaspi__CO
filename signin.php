@@ -10,7 +10,7 @@ function signOk ($con, $username, $password){
 
 //Code start here
 require_once('connectvars.php');
-$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);//NOT SURE I NEED THIS
+$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
@@ -25,7 +25,8 @@ if (signOk($con, $username, $password) == 0) {echo '<script>alert ("Wrong userna
     session_start();
     $_SESSION['loged'] = $username;
     $_SESSION['new'] = 0;//meanning user is not new.
-    echo 'logged in as: '.$_SESSION['loged'];
+    echo '<script>location.href = "main.php"</script>';
+
   }
 
   ?>
