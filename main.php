@@ -16,10 +16,10 @@
   <link rel="icon" type="image/ico" href="assest/img/fav.ico">
 </head>
 <body>
-  <div class="container">
+  <!--<div class="container">
     <h1>Crate a New MeMo</h1>
 
-    <!--The Code for New MeMo-->
+
     <form id="myMemo" action="/action_page.php">
         Memo Title:
         <input type="text" name="TitleName" maxlength="15" />
@@ -42,10 +42,21 @@
                 document.getElementById("myMemo").submit();
             }
     </script>
-</div>
+</div>-->
 
 <?php
+function getAllBulletins($con, $username){
+  $return = array();
+  $query = "SELECT bulletinId FROM connector WHERE username = '$username'";
+  $result = mysqli_query($con, $query) or die ("Cannot retrieve info");
+  while ($row = mysqli_fetch_array($result)){
+
+    array_push($return,$row['bulletinId']);
+  }
+  return $return;
+}
 //display all the memos
+
 require_once('connectvars.php');
 $con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 if ($conn->connect_error) {
@@ -53,8 +64,40 @@ if ($conn->connect_error) {
 }
 session_start();
 $username = $_SESSION['loged'];
+$userBulletinNumbers = getAllBulletins($con, $username);//this will hold user bulletins id's
+$length = count($userBulletinNumbers);
+for ($i=0; $i < $length; $i++){
+  mysqli_set_charset($con, "utf8") or die ('Could not set utf-8');//Will allow us to use hebrew
+  $query = "SELECT * FROM memos WHERE bulletin_id = '$userBulletinNumbers[$i]'";
+  $result = mysqli_query($con, $query) or die ("Cannot get memos");
+  echo '<h2>Bulletin number : '.$userBulletinNumbers[$i].'</h2>';
+  while ($row = mysqli_fetch_array($result)){
+    echo '<div style="float:left">';
+    echo '<ul>';
+    echo '<li>';
+    echo '<a id="IdMemoLink" href="#">';
+    echo '<h2 id="IdTitleName">Created by : '.$row['created_by'].' Date : '.$row['date_created'].'</h2>';
+    echo '<p id="IdMemoText">'. $row['data']. '</p>';
+    echo '</li>';
+    echo '</a>';
+    echo '</ul>';
+    echo '</div>';
+    }
+}
 
-function getAllBulletins($con, $username){
+
+
+
+
+
+// for i=0 to maxbulletins
+  //retreive users bulletinId
+  //display all memos connected to that bulletinId
+
+
+
+
+/*function getAllBulletins($con, $username){
   $query = "SELECT bulletinId FROM connector WHERE username = '$username'";
   $result = mysqli_query($con, $query) or die ("Cannot retrieve info");
   $data = '';
@@ -62,7 +105,7 @@ function getAllBulletins($con, $username){
     $data += $row['bulletinId']
     echo $row['bulletinId'].'<br>';
   }
-}
+}*/
 
 
 

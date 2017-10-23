@@ -40,11 +40,13 @@ function addImg($con, $memoId, $imgUrl){
 }
 
 function getAllBulletins($con, $username){
+  $return = array();
   $query = "SELECT bulletinId FROM connector WHERE username = '$username'";
   $result = mysqli_query($con, $query) or die ("Cannot retrieve info");
   while ($row = mysqli_fetch_array($result)){
-    echo $row['bulletinId'].'<br>';
+    array_push($return, '$row['bulletinId']');
   }
+  return $return;
 }
 
 function signUserToBulletin ($con, $username, $bulletinId){
@@ -140,7 +142,7 @@ if(isset($_POST['btn_7']))
 if(isset($_POST['image']))
 {
 
-  
+
   $target_dir = "uploads/";
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $uploadOk = 1;
